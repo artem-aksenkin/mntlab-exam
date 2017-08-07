@@ -30,3 +30,9 @@
   - tomcat
   - nginx
   tags: provision
+
+- name: App deployment
+  hosts: vagrant
+  roles:
+  - deploy
+  tags: deployment

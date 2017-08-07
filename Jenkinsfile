@@ -15,14 +15,16 @@ node("${env.SLAVE}") {
         $ mvn clean package -DbuildNumber=$BUILD_NUMBER
     */
     deleteDir()
-    echo "GIT URL: `git config --get remote.origin.url`" >> ${WORKSPACE}/src/main/resources/build-info.txt
-    echo "GIT Commit: `git rev-parse HEAD`" >> ${WORKSPACE}/src/main/resources/build-info.txt
-    echo "GIT Branch: `git rev-parse --abbrev-ref HEAD`" >> ${WORKSPACE}/src/main/resources/build-info.txt
-    git branch: 'aaksionkin', url: 'git@git.epam.com:siarhei_beliakou/mntlab-exam.git'
     sh "echo build artifact"
-    sh "date >> src/main/resources/build-info.txt"
-    sh "hostname >> src/main/resources/build-info.txt"
-    sh "whoami >> src/main/resources/build-info.txt"
+    git branch: 'aaksionkin', url: 'git@git.epam.com:siarhei_beliakou/mntlab-exam.git'
+    sh  "echo Build time: ${BUILD_TIMESTAMP} > src/main/resources/build-info.txt"
+    sh  "echo Build Machine Name: ${env.SLAVE} >> src/main/resources/build-info.txt"
+    wrap([$class: 'BuildUser']){
+        sh "echo Build User Name: ${BUILD_USER} >> src/main/resources/build-info.txt"
+    }
+    echo "GIT URL: 'git config --get remote.origin.url'" >> ${WORKSPACE}/src/main/resources/build-info.txt
+    echo "GIT Commit: 'git rev-parse HEAD'" >> ${WORKSPACE}/src/main/resources/build-info.txt
+    echo "GIT Branch: 'git rev-parse --abbrev-ref HEAD'" >> ${WORKSPACE}/src/main/resources/build-info.txt
     sh "cat src/main/resources/build-info.txt"
     sh "cp src/main/resources/build-info.txt roles/deploy/templates/build-info.txt.j2d"
     sh "mvn clean package -DbuildNumber=$BUILD_NUMBER"

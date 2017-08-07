@@ -1,3 +1,3 @@
-- Deployment time: {{ deploy_info.date }}
+- Deployment time: {{ ansible_date_time.time }}
 - Deploy User: {{ username }}
 - Deployment Job: {{jenkins_job_name.stdout}}

@@ -19,7 +19,7 @@
 - name:
   deployment: url="{{ url }}" war="{{ war }}" username="{{ username }}" password="{{ password }}"
   delegate_to: localhost
-  register: deploy_info
+
 
 
 

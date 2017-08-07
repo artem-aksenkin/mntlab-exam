@@ -52,7 +52,7 @@ node("${env.SLAVE}") {
     */
     withEnv(["ANSIBLE_FORCE_COLOR=true", "PYTHONUNBUFFERED=1"]){
         ansiColor('xterm') {
-            sh "ansible-playbook stack.yml -t create -v"
+            sh "ansible-playbook stack.yml -t create"
             sh "cat ${WORKSPACE}/stack.yml"
 
         }
@@ -111,7 +111,7 @@ node("${env.SLAVE}") {
      withEnv(["ANSIBLE_FORCE_COLOR=true", "PYTHONUNBUFFERED=1"]){
         ansiColor('xterm') {
            sh "ansible-playbook stack.yml -t create,testing -v"
-           sh "ansible-playbook stack.yml -t create -e state=destroyed -v"
+           sh "ansible-playbook stack.yml -t create -e dest=/home/student/cm/ansible/day-4/ state=destroyed -v"
            sh "cat ${WORKSPACE}/roles/java_test/tasks/main.yml"
            sh "cat ${WORKSPACE}/roles/tomcat_test/tasks/main.yml"
            sh "cat ${WORKSPACE}/roles/nginx_test/tasks/main.yml"

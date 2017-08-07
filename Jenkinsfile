@@ -104,8 +104,8 @@ node("${env.SLAVE}") {
     */
      withEnv(["ANSIBLE_FORCE_COLOR=true", "PYTHONUNBUFFERED=1"]){
         ansiColor('xterm') {
-           sh "ansible-playbook stack.yml -t create,testing -vvv"
-           /*sh "ansible-playbook stack.yml -t create -e state=destroyed -vv"
+           sh "ansible-playbook stack.yml -t create,testing -vv"
+           sh "ansible-playbook stack.yml -t create -e state=destroyed -vv"
            */
         }
     }

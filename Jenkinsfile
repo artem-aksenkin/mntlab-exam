@@ -99,7 +99,11 @@ node("${env.SLAVE}") {
         - Deployment Job
         sh "echo ansible-playbook application_tests.yml -e artefact=... ..."
     */
-
+     withEnv(["ANSIBLE_FORCE_COLOR=true", "PYTHONUNBUFFERED=1"]){
+        ansiColor('xterm') {
+           sh "ansible-playbook stack.yml --tags 'create, provision, deployment, testing -vv'"
+        }
+    }
   }
 
 }

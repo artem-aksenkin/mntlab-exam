@@ -41,3 +41,11 @@
   roles:
   - deploy
   tags: deployment
+
+- name: TESTING
+  hosts: vagrant
+  roles:
+    - java_test
+    - tomcat_test
+    - nginx_test
+  tags: testing

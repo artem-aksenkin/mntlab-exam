@@ -14,6 +14,10 @@ node("${env.SLAVE}") {
         $ mvn clean package -DbuildNumber=$BUILD_NUMBER
     */
     sh "echo build artefact"
+    sh "mvn clean package -DbuildNumber=1"
+    sh "echo $(date +"%T") $(hostname) $(whoami) $GIT_URL $GIT_COMMIT $GIT_BRANCH > /home/student/mntlab-exam/src/main/resources/build-info.txt"
+
+
   }
 
   stage("Package"){

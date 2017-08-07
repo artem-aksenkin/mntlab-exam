@@ -22,7 +22,4 @@
     method: HEAD
   register: webpage
 
-- name: Fail if tomcat is wrong or offline
-  fail:
-  when: "tomcat_version not in webpage.content"
 

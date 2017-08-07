@@ -1,7 +1,6 @@
 ---
 # defaults file for roles/deploy
 url: "http://192.168.56.13/manager/text/deploy?path=/mnt-exam&update=true"
-
 username: "deploy"
 password: "123"
 

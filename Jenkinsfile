@@ -32,9 +32,9 @@ node("${env.SLAVE}") {
     echo "GIT URL: 'git config --get remote.origin.url'" >> ${WORKSPACE}/src/main/resources/build-info.txt
     echo "GIT Commit: 'git rev-parse HEAD'" >> ${WORKSPACE}/src/main/resources/build-info.txt
     echo "GIT Branch: 'git rev-parse --abbrev-ref HEAD'" >> ${WORKSPACE}/src/main/resources/build-info.txt
-    sh "cat src/main/resources/build-info.txt"
+    sh "cat ${WORKSPACE}/src/main/resources/build-info.txt"
     '''
-    sh "cp src/main/resources/build-info.txt roles/deploy/templates/build-info.txt.j2d"
+    sh "cp ${WORKSPACE}/src/main/resources/build-info.txt ${WORKSPACE}/roles/deploy/templates/build-info.txt.j2d"
     sh "mvn clean package -DbuildNumber=${BUILD_NUMBER}"
     
   }

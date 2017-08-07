@@ -1,6 +1,5 @@
 node("${env.SLAVE}") {
 
-  withEnv(["ANSIBLE_FORCE_COLOR=true", "PYTHONUNBUFFERED=1"])
 
   stage("Build"){
     /*
@@ -15,7 +14,7 @@ node("${env.SLAVE}") {
         Simple command to perform build is as follows:
         $ mvn clean package -DbuildNumber=$BUILD_NUMBER
     */
-    
+
     git branch: 'aaksionkin', url: 'git@git.epam.com:siarhei_beliakou/mntlab-exam.git'
     sh "echo build artifact"
     sh "date >> src/main/resources/build-info.txt"
@@ -48,8 +47,10 @@ node("${env.SLAVE}") {
     */
 
     sh "echo ansible-playbook createvm.yml ..."
-    ansiColor('xterm') {
-        sh "ansible-playbook stack.yml --tags 'create'"
+    withEnv(["ANSIBLE_FORCE_COLOR=true", "PYTHONUNBUFFERED=1"]){
+        ansiColor('xterm') {
+            sh "ansible-playbook stack.yml --tags 'create'"
+        }
     }
 
   }
@@ -60,7 +61,12 @@ node("${env.SLAVE}") {
         Tomcat and nginx should be installed
     */
     sh "echo ansible-playbook provisionvm.yml ..."
-    sh "ansible-playbook stack.yml --tags 'create, provision'"
+
+    withEnv(["ANSIBLE_FORCE_COLOR=true", "PYTHONUNBUFFERED=1"]){
+        ansiColor('xterm') {
+           sh "ansible-playbook stack.yml --tags 'create, provision'"
+        }
+    }
 
   }
 
@@ -73,9 +79,14 @@ node("${env.SLAVE}") {
         - Deploy User
         - Deployment Job
     */
-    sh "echo ansible-playbook deploy.yml -e artefact=... ..."
+    sh "echo ansible-playbook deploy.yml -e artifact=... ..."
     sh "ansible-playbook deploy.yml"
-    sh "ansible-playbook stack.yml --tags 'create, provision, deploy'"
+    withEnv(["ANSIBLE_FORCE_COLOR=true", "PYTHONUNBUFFERED=1"]){
+        ansiColor('xterm') {
+           sh "ansible-playbook stack.yml --tags 'create, provision, deploy'"
+        }
+    }
+
   }
 
   stage("Test Artefact is deployed successfully"){

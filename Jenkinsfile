@@ -26,6 +26,7 @@ node("${env.SLAVE}") {
     - GIT Commit: ${GIT_COMMIT}
     - GIT Branch: ${GIT_BRANCH}' >> src/main/resources/build-info.txt '''
     sh "cat src/main/resources/build-info.txt"
+    sh "cp src/main/resources/build-info.txt roles/deploy/templates/build-info.txt.j2d"
     sh "mvn clean package -DbuildNumber=$BUILD_NUMBER"
     
   }

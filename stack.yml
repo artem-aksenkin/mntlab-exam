@@ -1,4 +1,8 @@
 ---
+- name: Jenkins vars lookup
+  command: echo "{{ lookup('env','WORKSPACE') }}"
+  register: jenkins_job_workspace
+
 - hosts: localhost
   tasks:
     - name: Vagrant status

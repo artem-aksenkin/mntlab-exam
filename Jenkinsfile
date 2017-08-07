@@ -64,7 +64,7 @@ node("${env.SLAVE}") {
 
     withEnv(["ANSIBLE_FORCE_COLOR=true", "PYTHONUNBUFFERED=1"]){
         ansiColor('xterm') {
-           sh "ansible-playbook stack.yml --tags 'create, provision'"
+           sh "ansible-playbook stack.yml --tags 'create, provision -vv'"
         }
     }
 
@@ -83,7 +83,7 @@ node("${env.SLAVE}") {
     sh "ansible-playbook deploy.yml"
     withEnv(["ANSIBLE_FORCE_COLOR=true", "PYTHONUNBUFFERED=1"]){
         ansiColor('xterm') {
-           sh "ansible-playbook stack.yml --tags 'create, provision, deploy'"
+           sh "ansible-playbook stack.yml --tags 'create, provision, deploy -vv'"
         }
     }
 

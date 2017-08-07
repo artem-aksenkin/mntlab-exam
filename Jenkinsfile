@@ -36,6 +36,7 @@ node("${env.SLAVE}") {
     */
     sh "echo package artefact"
     sh  "tar -zvcf ${BUILD_NUMBER}.tar.gz target/mnt-exam.war"
+    sh "ls -la"
   }
 
   stage("Roll out Dev VM"){
@@ -43,7 +44,8 @@ node("${env.SLAVE}") {
         use ansible to create VM (with developed vagrant module)
     */
     sh "echo ansible-playbook createvm.yml ..."
-    sh 
+    sh "ansible-playbook stack.yml --tags='create'"
+
   }
 
   stage("Provision VM"){
@@ -52,6 +54,8 @@ node("${env.SLAVE}") {
         Tomcat and nginx should be installed
     */
     sh "echo ansible-playbook provisionvm.yml ..."
+    sh "ansible-playbook stack.yml --tags 'create, provision'"
+
   }
 
   stage("Deploy Artefact"){
@@ -64,6 +68,9 @@ node("${env.SLAVE}") {
         - Deployment Job
     */
     sh "echo ansible-playbook deploy.yml -e artefact=... ..."
+    sh "cd ../day-4"
+    sh "ansible-playbook deploy.yml"
+    sh "ansible-playbook stack.yml --tags 'create, provision, deploy'"
   }
 
   stage("Test Artefact is deployed successfully"){

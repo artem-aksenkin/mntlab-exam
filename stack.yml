@@ -10,6 +10,8 @@
     command: echo "{{ lookup('env','JOB_NAME') }}"
     register: jenkins_job_name
 
+  - debug: var=jenkins_job_name
+
   tasks:
     - name: Vagrant status
       vagrant:

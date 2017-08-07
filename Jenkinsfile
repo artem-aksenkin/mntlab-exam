@@ -2,7 +2,6 @@ node("${env.SLAVE}") {
 
   stage("Checkout scm")
     {
-       deleteDir()
        git branch: 'aaksionkin', url: 'git@git.epam.com:siarhei_beliakou/mntlab-exam.git'
 
     }

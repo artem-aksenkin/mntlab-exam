@@ -4,9 +4,17 @@
   shell: service nginx status
   become: yes
 
-- name: Check for nginx web page
-  uri:
-    url: "http://{{nginx_address}}:{{nginx_port}}"
-    return_content: yes
-  register: webpage
+#- name: Perform a HEAD on nginx
+#  uri:
+#    uri: http://{{nginx_address}}:{{nginx_port}}
+#    method: HEAD
+
+
+- name: nginx is listening on port 80
+  wait_for:
+    host: 192.168.56.13
+    port: 80
+    delay: 10
+    state: started
+  delegate_to: localhost
 

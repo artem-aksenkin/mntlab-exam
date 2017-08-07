@@ -36,7 +36,7 @@ node("${env.SLAVE}") {
     /*
         use tar tool to package built war file into *.tar.gz package
     */
-    sh "echo package artefact"
+    sh "echo package artifact"
     sh  "tar -zvcf ${BUILD_NUMBER}.tar.gz target/mnt-exam.war"
     sh "ls -la"
   }
@@ -78,8 +78,9 @@ node("${env.SLAVE}") {
         - Deployment time
         - Deploy User
         - Deployment Job
+        sh "echo ansible-playbook deploy.yml -e artifact=... ..."
     */
-    sh "echo ansible-playbook deploy.yml -e artifact=... ..."
+
     sh "ansible-playbook deploy.yml"
     withEnv(["ANSIBLE_FORCE_COLOR=true", "PYTHONUNBUFFERED=1"]){
         ansiColor('xterm') {
@@ -97,8 +98,9 @@ node("${env.SLAVE}") {
         - Deployment time
         - Deploy User
         - Deployment Job
+        sh "echo ansible-playbook application_tests.yml -e artefact=... ..."
     */
-    sh "echo ansible-playbook application_tests.yml -e artefact=... ..."
+
   }
 
 }

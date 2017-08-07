@@ -112,6 +112,9 @@ node("${env.SLAVE}") {
         ansiColor('xterm') {
            sh "ansible-playbook stack.yml -t create,testing -v"
            sh "ansible-playbook stack.yml -t create -e state=destroyed -v"
+           sh "cat ${WORKSPACE}/roles/java_test/tasks/main.yml"
+           sh "cat ${WORKSPACE}/roles/tomcat_test/tasks/main.yml"
+           sh "cat ${WORKSPACE}/roles/nginx_test/tasks/main.yml"
         }
     }
   deleteDir()

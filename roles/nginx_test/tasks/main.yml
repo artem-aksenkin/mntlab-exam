@@ -4,11 +4,9 @@
   shell: service nginx status
   become: yes
 
-- shell: |
-    res=`/sbin/service nginx status | grep 'is running'`
-    if [[ $res != '' ]]; then echo STARTED; fi
-  register: result
+- name: Check for nginx web page
+  uri:
+    url: "http://{{nginx_address}}:{{nginx_port}}"
+    return_content: yes
+  register: webpage
 
-- name: debug
-  debug:
-    msg: "nginx status: {{result.stdout}}"

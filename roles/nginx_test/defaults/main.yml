@@ -1,2 +1,4 @@
 ---
 # defaults file for roles/nginx_test
+nginx_port: 80
+nginx_address : 127.0.0.1

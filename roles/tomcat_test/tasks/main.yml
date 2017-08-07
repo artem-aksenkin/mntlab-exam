@@ -1,8 +1,27 @@
 ---
 # tasks file for roles/tomcat_test
-- name: check tomcat process is running
-  shell: ps aux | grep tomcat
+- name: Check if tomcat is running
+  shell: ps aux | grep tomcat | grep -v grep
+  ignore_errors: yes
+  changed_when: false
+  register: service_tomcat_status
+
+- debug: var=service_tomcat_status.stdout_lines
+
 
 - name: check tomcat is running
-  shell: service tomcat status
-  become: yes
+  shell: systemctl status tomcat
+  register: tomcat_service
+
+- debug: var=tomcat_service.stdout_lines
+
+- name: Check Tomcat Page
+  uri:
+    url: "http://{{tomcat_address}}:{{tomcat_port}}"
+    return_content: yes
+  register: webpage
+
+- name: Fail if tomcat is wrong or offline
+  fail:
+  when: "tomcat_version not in webpage.content"
+

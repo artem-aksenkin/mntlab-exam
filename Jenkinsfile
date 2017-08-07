@@ -81,7 +81,6 @@ node("${env.SLAVE}") {
         sh "echo ansible-playbook deploy.yml -e artifact=... ..."
     */
 
-    sh "ansible-playbook deploy.yml"
     withEnv(["ANSIBLE_FORCE_COLOR=true", "PYTHONUNBUFFERED=1"]){
         ansiColor('xterm') {
            sh "ansible-playbook stack.yml --tags 'create, provision, deployment -vv'"

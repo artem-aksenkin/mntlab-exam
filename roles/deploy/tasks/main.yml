@@ -14,7 +14,7 @@
 
 - name: Put deployment info file
   template:
-    src: {{ jenkins_job_workspace }}/target/build-info.txt
+    src: "{{ jenkins_job_workspace }}"/target/build-info.txt
     mode: "u=rwx,g=rwx,o=rwx"
     dest: /var/lib/tomcat/webapps/deploy-info.txt
   become: yes

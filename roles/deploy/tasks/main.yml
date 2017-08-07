@@ -1,5 +1,7 @@
 ---
 # tasks file for roles/deploy
+- debug: var=jenkins_job_name
+
 - name: Create deployment info dir
   file:
     path: /var/lib/tomcat/webapps/
@@ -8,7 +10,7 @@
   become: yes
   become_method: sudo
 
-- debug: var=jenkins_job_name
+
 
 - name: Put deployment info file
   template:

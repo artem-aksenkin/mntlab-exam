@@ -105,6 +105,9 @@ case $state in
 	ssh)
 		vagrant_ssh_config
 	;;
+	status)
+	    status_vagrant
+	;;
 	*)
 		printf '{"failed": true, "msg": "invalid state selected {started | stopped | destroyed}"\n}'
 		exit 1

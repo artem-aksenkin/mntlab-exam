@@ -4,7 +4,7 @@
   <groupId>org.example</groupId>
   <artifactId>mnt-exam</artifactId>
   <packaging>war</packaging>
-  <version>1.${buildNumber}</version>
+  <version>1.0</version>
   <name>MNT Exam Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>

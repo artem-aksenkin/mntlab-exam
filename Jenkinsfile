@@ -2,7 +2,7 @@ node("${env.SLAVE}") {
 
   stage("Checkout scm")
     {
-       git branch: 'aaksionkin', url: 'git@git.epam.com:siarhei_beliakou/mntlab-exam.git'
+       git branch: 'aaksionkin', url: 'https://github.com/artem-aksenkin/mntlab-exam.git'
 
     }
 

@@ -23,8 +23,8 @@ node("${env.SLAVE}") {
         $ mvn clean package -DbuildNumber=$BUILD_NUMBER
     */
     sh "echo build artifact"
-    sh  "echo Build time: ${BUILD_TIMESTAMP} > src/main/resources/build-info.txt"
-    sh  "echo Build Machine Name: ${env.SLAVE} >> src/main/resources/build-info.txt"
+    sh "echo Build time: ${BUILD_TIMESTAMP} > src/main/resources/build-info.txt"
+    sh "echo Build Machine Name: ${env.SLAVE} >> src/main/resources/build-info.txt"
     wrap([$class: 'BuildUser']){
     sh "echo Build User Name: ${BUILD_USER} >> src/main/resources/build-info.txt"
     }

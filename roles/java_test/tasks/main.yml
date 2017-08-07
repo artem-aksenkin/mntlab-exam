@@ -4,6 +4,7 @@
   shell: java -version
   register: result
 
-- name: debug
-  debug:
-    msg: "Java {{result.stderr}} installed"
+- name: Check for output of Java
+  shell: java -version
+  register: output
+- debug: var=output.stderr_lines

@@ -27,7 +27,7 @@ node("${env.SLAVE}") {
     - GIT Branch: ${GIT_BRANCH}' >> src/main/resources/build-info.txt '''
     sh "cat src/main/resources/build-info.txt"
     sh "mvn clean package -DbuildNumber=$BUILD_NUMBER"
-    sh  "tar -zcf ${BUILD_NUMBER}.tar.gz target/mnt-exam.war "
+    
   }
 
   stage("Package"){
@@ -35,7 +35,7 @@ node("${env.SLAVE}") {
         use tar tool to package built war file into *.tar.gz package
     */
     sh "echo package artefact"
-    sh ""
+    sh  "tar -zcf ${BUILD_NUMBER}.tar.gz target/mnt-exam.war"
   }
 
   stage("Roll out Dev VM"){

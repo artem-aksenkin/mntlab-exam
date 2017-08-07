@@ -12,10 +12,3 @@
 - name: debug
   debug:
     msg: "nginx status: {{result.stdout}}"
-
-- name: get start time
-  shell: |
-    echo Now: `date`
-    pid=`pidof nginx`
-    stat -c %z /proc/$pid
-  become: yes

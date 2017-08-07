@@ -1,7 +1,5 @@
 ---
-- name: Jenkins vars lookup
-  command: echo "{{ lookup('env','WORKSPACE') }}"
-  register: jenkins_job_workspace
+
 
 - hosts: localhost
   tasks:
@@ -11,6 +9,9 @@
         state: started
       register: hostinfo
 
+    - name: Jenkins vars lookup
+      command: echo "{{ lookup('env','WORKSPACE') }}"
+      register: jenkins_job_workspace
 
     - name: Add discovered hosts
       add_host:

@@ -1,2 +1,5 @@
 ---
 # defaults file for roles/tomcat_test
+http_port: 8080
+tomcat_address: 127.0.0.1
+tomcat_version: 8.5.16

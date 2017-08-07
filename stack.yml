@@ -1,6 +1,5 @@
 ---
 
-
 - hosts: localhost
   tasks:
     - name: Vagrant status
@@ -26,7 +25,7 @@
       when: hostinfo.status == "running"
   tags: create
 
-- name: Tomcat
+- name: Tomcat provision
   hosts: vagrant
   become: yes
   become_method: sudo

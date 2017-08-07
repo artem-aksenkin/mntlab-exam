@@ -17,7 +17,7 @@
 
 - name: Check Tomcat Page
   uri:
-    url: "http://{{ tomcat_address }}:{{ http_port }"
+    url: "http://{{ tomcat_address }}:{{ http_port }}"
     return_content: yes
   register: webpage
 

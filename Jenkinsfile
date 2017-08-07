@@ -16,9 +16,10 @@ node("${env.SLAVE}") {
     
     git branch: 'aaksionkin', url: 'git@git.epam.com:siarhei_beliakou/mntlab-exam.git'
     sh "echo build artifact"
-    sh "mvn clean package -DbuildNumber=1"
-    sh "echo ${(date +"%T")} ${(hostname)} ${(whoami)} ${GIT_URL} ${GIT_COMMIT} ${GIT_BRANCH} > /home/student/mntlab-exam/src/main/resources/build-info.txt"
-    /*sh  'tar -zcf ${ARTIFACT_SUFFIX}-${BUILD_NUMBER}.tar.gz '
+    sh "echo ${(date +"%T")} ${(hostname)} ${(whoami)} ${GIT_URL} ${GIT_COMMIT} ${GIT_BRANCH} > src/main/resources/build-info.txt"
+    sh "cat src/main/resources/build-info.txt"
+    sh "mvn clean package -DbuildNumber=$BUILD_NUMBER"
+    sh  "tar -zcf ${BUILD_NUMBER}.tar.gz target/mnt-exam.war "
   }
 
   stage("Package"){

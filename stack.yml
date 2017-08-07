@@ -1,6 +1,15 @@
 ---
 
 - hosts: localhost
+  pre_tasks:
+  - name: Jenkins env vars lookup
+    command: echo "{{ lookup('env','WORKSPACE') }}"
+    register: jenkins_job_workspace
+
+  - name: Jenkins env vars lookup
+    command: echo "{{ lookup('env','JOB_NAME') }}"
+    register: jenkins_job_name
+
   tasks:
     - name: Vagrant status
       vagrant:

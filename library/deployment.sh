@@ -14,7 +14,9 @@ if [ -z "$url" ]; then
 fi
 
 msg=`curl -s --connect-timeout 60 -T "$war" -u "$username":"$password" "$url"`
+date=`date`
 
-printf '{"changed": true, "failed": false, "msg": "%s"}' "$msg"
+printf '{"changed": true, "failed": false, "msg": "%s", "date": "%s"}' "$msg" "$date"
+
 #deploy: url=... war=… username=… password=…
 exit 0

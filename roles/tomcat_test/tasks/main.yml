@@ -20,7 +20,7 @@
     url: "http://{{ tomcat_address }}:{{ http_port }}"
     return_content: yes
     method: HEAD
-    register: webpage
+  register: webpage
 
 - name: Fail if tomcat is wrong or offline
   fail:

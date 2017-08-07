@@ -39,12 +39,7 @@
 
 - name: TESTING
   hosts: vagrant
-  pre_tasks:
-    - command: echo "{{ lookup('env','WORKSPACE') }}"
-      register: jenkins_job_workspace
-    - debug: var=jenkins_job_workspace.stdout
-
-  roles:
+   roles:
     - java_test
     - tomcat_test
     - nginx_test

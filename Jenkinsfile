@@ -1,5 +1,7 @@
 node("${env.SLAVE}") {
 
+  withEnv(["ANSIBLE_FORCE_COLOR=true", "PYTHONUNBUFFERED=1"])
+
   stage("Build"){
     /*
         Update file src/main/resources/build-info.txt with following details:
@@ -44,8 +46,11 @@ node("${env.SLAVE}") {
     /*
         use ansible to create VM (with developed vagrant module)
     */
+
     sh "echo ansible-playbook createvm.yml ..."
-    sh "ansible-playbook stack.yml --tags='create'"
+    ansiColor('xterm') {
+        sh "ansible-playbook stack.yml --tags 'create'"
+    }
 
   }
 

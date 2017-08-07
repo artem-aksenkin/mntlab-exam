@@ -1,9 +1,9 @@
 ---
 # tasks file for roles/deploy
-- name: Jenkins env vars lookup
-  command: echo "{{ lookup('env','WORKSPACE') }}"
-  register: jenkins_job_workspace
-  delegate_to: localhost
+#- name: Jenkins env vars lookup
+#  command: echo "{{ lookup('env','WORKSPACE') }}"
+#  register: jenkins_job_workspace
+#  delegate_to: localhost
 
 - name: Create deployment info dir
   file:

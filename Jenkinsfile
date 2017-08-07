@@ -19,11 +19,12 @@ node("${env.SLAVE}") {
     sh "date >> src/main/resources/build-info.txt"
     sh "hostname >> src/main/resources/build-info.txt"
     sh "whoami >> src/main/resources/build-info.txt"
-    sh "echo ```
+    sh ''' 
+    echo ' BUILD DETAILS:
+      Developer name: Artsiom Aksionkin
     - GIT URL: ${GIT_URL}
     - GIT Commit: ${GIT_COMMIT}
-    - GIT Branch: ${GIT_BRANCH}
-    ``` >> src/main/resources/build-info.txt"
+    - GIT Branch: ${GIT_BRANCH}' >> src/main/resources/build-info.txt '''
     sh "cat src/main/resources/build-info.txt"
     sh "mvn clean package -DbuildNumber=$BUILD_NUMBER"
     sh  "tar -zcf ${BUILD_NUMBER}.tar.gz target/mnt-exam.war "

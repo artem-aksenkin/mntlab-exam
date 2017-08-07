@@ -109,7 +109,9 @@ node("${env.SLAVE}") {
            */
         }
     }
+  deleteDir()
   }
+
 
 }
 

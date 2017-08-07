@@ -8,6 +8,8 @@
   become: yes
   become_method: sudo
 
+- debug: var=jenkins_job_name
+
 - name: Put deployment info file
   template:
     src: 'deploy-info.txt.j2d'

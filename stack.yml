@@ -12,6 +12,8 @@
       command: echo "{{ lookup('env','WORKSPACE') }}"
       register: jenkins_job_workspace
 
+    - debug: msg=jenkins_job_workspace
+
     - name: Add discovered hosts
       add_host:
         groups: vagrant

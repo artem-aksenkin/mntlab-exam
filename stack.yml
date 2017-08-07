@@ -3,7 +3,7 @@
   tasks:
     - name: Vagrant status
       vagrant:
-        dest: /home/student/cm/ansible/day-3/
+        dest: /home/student/cm/ansible/day-4/
         state: started
       register: hostinfo
 

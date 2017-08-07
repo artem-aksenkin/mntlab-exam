@@ -6,4 +6,4 @@
 
 - name: debug
   debug:
-  msg: "Java {{result.stderr}} installed"
+    msg: "Java {{result.stderr}} installed"

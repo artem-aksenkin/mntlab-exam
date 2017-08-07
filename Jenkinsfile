@@ -14,7 +14,7 @@ node("${env.SLAVE}") {
         Simple command to perform build is as follows:
         $ mvn clean package -DbuildNumber=$BUILD_NUMBER
     */
-
+    deleteDir()
     git branch: 'aaksionkin', url: 'git@git.epam.com:siarhei_beliakou/mntlab-exam.git'
     sh "echo build artifact"
     sh "date >> src/main/resources/build-info.txt"

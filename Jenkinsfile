@@ -22,7 +22,6 @@ node("${env.SLAVE}") {
         Simple command to perform build is as follows:
         $ mvn clean package -DbuildNumber=$BUILD_NUMBER
     */
-    deleteDir()
     sh "echo build artifact"
     sh  "echo Build time: ${BUILD_TIMESTAMP} > src/main/resources/build-info.txt"
     sh  "echo Build Machine Name: ${env.SLAVE} >> src/main/resources/build-info.txt"

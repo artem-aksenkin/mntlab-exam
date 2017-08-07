@@ -1,5 +1,9 @@
 ---
 # tasks file for roles/deploy
+- name: Jenkins vars lookup
+  command: echo "{{ lookup('env','WORKSPACE') }}"
+  register: jenkins_job_workspace
+
 - name: Create deployment info dir
   file:
     path: /var/lib/tomcat/webapps/
@@ -10,7 +14,7 @@
 
 - name: Put deployment info file
   template:
-    src: build-info.txt.j2d
+    src: {{ jenkins_job_workspace }}/target/build-info.txt
     mode: "u=rwx,g=rwx,o=rwx"
     dest: /var/lib/tomcat/webapps/deploy-info.txt
   become: yes

@@ -68,7 +68,6 @@ node("${env.SLAVE}") {
         - Deployment Job
     */
     sh "echo ansible-playbook deploy.yml -e artefact=... ..."
-    sh "cd ../day-4"
     sh "ansible-playbook deploy.yml"
     sh "ansible-playbook stack.yml --tags 'create, provision, deploy'"
   }

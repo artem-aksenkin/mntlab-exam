@@ -1,0 +1,8 @@
+---
+# tasks file for roles/tomcat_test
+- name: check tomcat process is running
+  shell: ps aux | grep tomcat
+
+- name: check tomcat is running
+  shell: service tomcat status
+  become: yes

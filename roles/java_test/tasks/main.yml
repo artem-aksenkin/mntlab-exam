@@ -1,0 +1,9 @@
+---
+# tasks file for roles/java_test
+- name: show java version
+  shell: java -version
+  register: result
+
+- name: debug
+  debug:
+  msg: "Java {{result.stderr}} installed"

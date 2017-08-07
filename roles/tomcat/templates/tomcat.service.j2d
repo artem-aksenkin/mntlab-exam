@@ -1,0 +1,20 @@
+# Systemd unit file for tomcat
+[Unit]
+Description=Apache Tomcat Web Application Container
+After=syslog.target network.target
+
+[Service]
+Type=forking
+
+Environment=CATALINA_PID={{tomcat_end}}/temp/tomcat.pid
+Environment=CATALINA_HOME={{tomcat_end}}
+Environment=CATALINA_BASE={{tomcat_end}}
+
+ExecStart={{tomcat_end}}/bin/startup.sh
+ExecStop=/bin/kill -15 $MAINPID
+
+User=tomcat
+Group=tomcat
+
+[Install]
+WantedBy=multi-user.target

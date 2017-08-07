@@ -35,7 +35,7 @@ node("${env.SLAVE}") {
         use tar tool to package built war file into *.tar.gz package
     */
     sh "echo package artefact"
-    sh  "tar -zcf ${BUILD_NUMBER}.tar.gz target/mnt-exam.war"
+    sh  "tar -zvcf ${BUILD_NUMBER}.tar.gz target/mnt-exam.war"
   }
 
   stage("Roll out Dev VM"){
@@ -43,6 +43,7 @@ node("${env.SLAVE}") {
         use ansible to create VM (with developed vagrant module)
     */
     sh "echo ansible-playbook createvm.yml ..."
+    sh 
   }
 
   stage("Provision VM"){

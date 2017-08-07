@@ -1,0 +1,21 @@
+---
+# tasks file for roles/vagrant
+- name: VM GET UP
+  hosts: localhost
+    vagrant:
+      dest: /home/student/cm/ansible/day-3/
+      state: started
+    delegate_to: localhost
+    register: hostinfo
+
+
+- name: Add discovered hosts
+  add_host:
+    groups: vagrant
+    name: "{{ hostinfo.os_name }}"
+    hostname: "{{ hostinfo.os_name }}"
+    ansible_host: "{{ hostinfo.ip }}"
+    ansible_port: "{{ hostinfo.port }}"
+    ansible_connection: ssh
+    ansible_user: "{{ hostinfo.user }}"
+    ansible_ssh_private_key_file: "{{ hostinfo.key }}"

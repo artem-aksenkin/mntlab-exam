@@ -1,0 +1,23 @@
+---
+- name: Tomcat getting ready for deployment
+  hosts: web
+  become: yes
+  become_method: sudo
+  roles:
+  - java
+  - tomcat
+  - nginx
+
+- name: Artifact info
+  hosts: localhost
+  tasks:
+    - name: add build info
+      command: echo $(date +"%T") $(hostname) $(whoami) > /home/student/cm/ansible/day-4/roles/deploy/templates/build-info.txt.j2d
+
+- name: App deployment
+  hosts: web
+  tags: deployment
+  roles:
+  - deploy
+
+

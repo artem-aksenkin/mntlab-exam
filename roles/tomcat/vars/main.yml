@@ -1,0 +1,4 @@
+---
+# vars file for roles/tomcat/
+tomcat_url: http://ftp.byfly.by/pub/apache.org/tomcat/tomcat-8/v{{tomcat_version}}/bin/apache-tomcat-{{tomcat_version}}.tar.gz
+tomcat_end: "/opt/tomcat/{{tomcat_version}}"

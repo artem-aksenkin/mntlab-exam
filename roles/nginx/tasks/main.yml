@@ -1,0 +1,16 @@
+---
+# tasks file for roles/nginx
+- name: Install nginx
+  yum: name=nginx state=present
+
+- name: Config nginx for proxy to app server
+  template: src=nginx.conf.j2d dest=/etc/nginx/nginx.conf mode=0755
+  notify:
+    - restart nginx
+
+- name: nginx service state
+  service: name=nginx state=started enabled=yes
+
+- name: wait for nginx to start
+  wait_for: port={{nginx_port}}
+  delay: 10

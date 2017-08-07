@@ -1,0 +1,16 @@
+---
+# tasks file for roles/
+
+- name: precondition - java_version
+  fail: msg="ERROR - required variable 'java_version' missing."
+  when: java_version is not defined
+
+- name: Install Java
+  yum: name={{java_version}} state=present
+
+- name: Check for output of Java
+  shell: java -version
+  register: output
+- debug: var=output.stderr_lines
+
+

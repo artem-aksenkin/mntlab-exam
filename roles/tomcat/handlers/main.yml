@@ -1,0 +1,7 @@
+---
+# handlers file for roles/tomcat/
+- name: systemd reload
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: tomcat

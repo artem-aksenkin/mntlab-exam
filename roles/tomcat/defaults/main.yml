@@ -1,0 +1,11 @@
+---
+# defaults file for roles/tomcat/
+tomcat_version: 8.5.16
+tomcat_home: "/opt/tomcat/"
+tomcat_user: tomcat
+tomcat_group: tomcat
+http_port: 8080
+hash_md5: ed752991f01e270ccfc7b4e8686f4f3c
+admin_username: deploy
+admin_password: 123
+https_port: 8443

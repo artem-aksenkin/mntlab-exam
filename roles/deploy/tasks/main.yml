@@ -1,0 +1,26 @@
+---
+# tasks file for roles/deploy
+- name: Create deployment info dir
+  file:
+    path: /var/lib/tomcat/webapps/
+    state: directory
+    mode: "u=rwx,g=rwx,o=rwx"
+  become: yes
+  become_method: sudo
+
+- name: Put deployment info file
+  template:
+    src: build-info.txt.j2d
+    mode: "u=rwx,g=rwx,o=rwx"
+    dest: /var/lib/tomcat/webapps/deploy-info.txt
+  become: yes
+  become_method: sudo
+
+- name:
+  deployment: url="{{ url }}" war="{{ war }}" username="{{ username }}" password="{{ password }}"
+  delegate_to: localhost
+
+
+
+
+

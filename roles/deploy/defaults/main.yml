@@ -1,0 +1,6 @@
+---
+# defaults file for roles/deploy
+url: "http://192.168.56.13/manager/text/deploy?path=/mnt-lab&update=true"
+war: "/home/student/cm/ansible/day-4/hello-war/target/mnt-lab.war"
+username: "deploy"
+password: "123"

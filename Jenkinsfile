@@ -13,7 +13,8 @@ node("${env.SLAVE}") {
         Simple command to perform build is as follows:
         $ mvn clean package -DbuildNumber=$BUILD_NUMBER
     */
-    sh "echo build artefact"
+    git url: "https://Artsiom_Aksionkin@git.epam.com/siarhei_beliakou/mntlab-exam.git", branch: 'aaksionkin'
+    sh "echo build artifact"
     sh "mvn clean package -DbuildNumber=1"
     sh "echo ${(date +"%T")} ${(hostname)} ${(whoami)} ${GIT_URL} ${GIT_COMMIT} ${GIT_BRANCH} > /home/student/mntlab-exam/src/main/resources/build-info.txt"
     /*sh  'tar -zcf ${ARTIFACT_SUFFIX}-${BUILD_NUMBER}.tar.gz '

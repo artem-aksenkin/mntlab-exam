@@ -16,7 +16,14 @@ node("${env.SLAVE}") {
     
     git branch: 'aaksionkin', url: 'git@git.epam.com:siarhei_beliakou/mntlab-exam.git'
     sh "echo build artifact"
-    sh "echo ${(date +"%T")} ${(hostname)} ${(whoami)} ${GIT_URL} ${GIT_COMMIT} ${GIT_BRANCH} > src/main/resources/build-info.txt"
+    sh "date >> src/main/resources/build-info.txt"
+    sh "hostname >> src/main/resources/build-info.txt"
+    sh "whoami >> src/main/resources/build-info.txt"
+    sh "echo ```
+    - GIT URL: ${GIT_URL}
+    - GIT Commit: ${GIT_COMMIT}
+    - GIT Branch: ${GIT_BRANCH}
+    ``` >> src/main/resources/build-info.txt"
     sh "cat src/main/resources/build-info.txt"
     sh "mvn clean package -DbuildNumber=$BUILD_NUMBER"
     sh  "tar -zcf ${BUILD_NUMBER}.tar.gz target/mnt-exam.war "

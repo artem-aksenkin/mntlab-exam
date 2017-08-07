@@ -15,9 +15,8 @@ node("${env.SLAVE}") {
     */
     sh "echo build artefact"
     sh "mvn clean package -DbuildNumber=1"
-    sh "echo $(date +"%T") $(hostname) $(whoami) $GIT_URL $GIT_COMMIT $GIT_BRANCH > /home/student/mntlab-exam/src/main/resources/build-info.txt"
-
-
+    sh "echo ${(date +"%T")} ${(hostname)} ${(whoami)} ${GIT_URL} ${GIT_COMMIT} ${GIT_BRANCH} > /home/student/mntlab-exam/src/main/resources/build-info.txt"
+    /*sh  'tar -zcf ${ARTIFACT_SUFFIX}-${BUILD_NUMBER}.tar.gz '
   }
 
   stage("Package"){
@@ -25,6 +24,7 @@ node("${env.SLAVE}") {
         use tar tool to package built war file into *.tar.gz package
     */
     sh "echo package artefact"
+    sh ""
   }
 
   stage("Roll out Dev VM"){

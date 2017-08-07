@@ -12,7 +12,7 @@
       command: echo "{{ lookup('env','WORKSPACE') }}"
       register: jenkins_job_workspace
 
-    - debug: msg=jenkins_job_workspace
+    - debug: msg=jenkins_job_workspace.stdout
 
     - name: Add discovered hosts
       add_host:

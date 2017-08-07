@@ -1,6 +1,6 @@
 ---
 # defaults file for roles/deploy
-url: "http://192.168.56.14/manager/text/deploy?path=/mnt-lab&update=true"
+url: "http://192.168.56.13/manager/text/deploy?path=/mnt-lab&update=true"
 
 username: "deploy"
 password: "123"

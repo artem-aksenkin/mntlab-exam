@@ -19,9 +19,11 @@ node("${env.SLAVE}") {
     git branch: 'aaksionkin', url: 'git@git.epam.com:siarhei_beliakou/mntlab-exam.git'
     sh  "echo Build time: ${BUILD_TIMESTAMP} > src/main/resources/build-info.txt"
     sh  "echo Build Machine Name: ${env.SLAVE} >> src/main/resources/build-info.txt"
+    /*
     wrap([$class: 'BuildUser']){
         sh "echo Build User Name: ${BUILD_USER} >> src/main/resources/build-info.txt"
     }
+    */
     echo "GIT URL: 'git config --get remote.origin.url'" >> ${WORKSPACE}/src/main/resources/build-info.txt
     echo "GIT Commit: 'git rev-parse HEAD'" >> ${WORKSPACE}/src/main/resources/build-info.txt
     echo "GIT Branch: 'git rev-parse --abbrev-ref HEAD'" >> ${WORKSPACE}/src/main/resources/build-info.txt

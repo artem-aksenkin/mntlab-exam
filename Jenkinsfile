@@ -1,5 +1,13 @@
 node("${env.SLAVE}") {
 
+  stage("Checkout scm")
+    {
+       deleteDir()
+       git branch: 'aaksionkin', url: 'git@git.epam.com:siarhei_beliakou/mntlab-exam.git'
+
+    }
+
+
 
   stage("Build"){
     /*
@@ -16,16 +24,17 @@ node("${env.SLAVE}") {
     */
     deleteDir()
     sh "echo build artifact"
-    git branch: 'aaksionkin', url: 'git@git.epam.com:siarhei_beliakou/mntlab-exam.git'
     sh  "echo Build time: ${BUILD_TIMESTAMP} > src/main/resources/build-info.txt"
     sh  "echo Build Machine Name: ${env.SLAVE} >> src/main/resources/build-info.txt"
     wrap([$class: 'BuildUser']){
-        sh "echo Build User Name: ${BUILD_USER} >> src/main/resources/build-info.txt"
+    sh "echo Build User Name: ${BUILD_USER} >> src/main/resources/build-info.txt"
     }
+    sh '''
     echo "GIT URL: 'git config --get remote.origin.url'" >> ${WORKSPACE}/src/main/resources/build-info.txt
     echo "GIT Commit: 'git rev-parse HEAD'" >> ${WORKSPACE}/src/main/resources/build-info.txt
     echo "GIT Branch: 'git rev-parse --abbrev-ref HEAD'" >> ${WORKSPACE}/src/main/resources/build-info.txt
     sh "cat src/main/resources/build-info.txt"
+    '''
     sh "cp src/main/resources/build-info.txt roles/deploy/templates/build-info.txt.j2d"
     sh "mvn clean package -DbuildNumber=${BUILD_NUMBER}"
     
@@ -44,11 +53,9 @@ node("${env.SLAVE}") {
     /*
         use ansible to create VM (with developed vagrant module)
     */
-
-    sh "echo ansible-playbook createvm.yml ..."
     withEnv(["ANSIBLE_FORCE_COLOR=true", "PYTHONUNBUFFERED=1"]){
         ansiColor('xterm') {
-            sh "ansible-playbook stack.yml --tags 'create' -vv"
+            sh "ansible-playbook stack.yml -t create -vv"
         }
     }
 
@@ -62,7 +69,7 @@ node("${env.SLAVE}") {
 
     withEnv(["ANSIBLE_FORCE_COLOR=true", "PYTHONUNBUFFERED=1"]){
         ansiColor('xterm') {
-           sh "ansible-playbook stack.yml --tags 'create, provision' -vv"
+           sh "ansible-playbook stack.yml -t create, provision -vv"
         }
     }
 
@@ -81,7 +88,7 @@ node("${env.SLAVE}") {
 
     withEnv(["ANSIBLE_FORCE_COLOR=true", "PYTHONUNBUFFERED=1"]){
         ansiColor('xterm') {
-           sh "ansible-playbook stack.yml --tags 'create, provision, deployment' -vv"
+           sh "ansible-playbook stack.yml -t create, provision, deployment -e war=${WORKSPACE}/target/mnt-exam.war -vv"
         }
     }
 
@@ -99,7 +106,9 @@ node("${env.SLAVE}") {
     */
      withEnv(["ANSIBLE_FORCE_COLOR=true", "PYTHONUNBUFFERED=1"]){
         ansiColor('xterm') {
-           sh "ansible-playbook stack.yml --tags 'create, provision, deployment, testing' -vvv"
+           sh "ansible-playbook stack.yml -t create, testing' -vvv"
+           /*sh "ansible-playbook stack.yml -t create -e state=destroyed -vv"
+           */
         }
     }
   }

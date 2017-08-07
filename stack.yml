@@ -43,7 +43,8 @@
       command: echo "{{ lookup('env','WORKSPACE') }}"
       register: jenkins_job_workspace
 
-- debug: var=jenkins_job_workspace.stdout
+  - debug: var=jenkins_job_workspace.stdout
+
   roles:
     - java_test
     - tomcat_test

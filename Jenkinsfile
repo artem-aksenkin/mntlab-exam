@@ -106,7 +106,6 @@ node("${env.SLAVE}") {
         ansiColor('xterm') {
            sh "ansible-playbook stack.yml -t create,testing -vv"
            sh "ansible-playbook stack.yml -t create -e state=destroyed -vv"
-           */
         }
     }
   deleteDir()

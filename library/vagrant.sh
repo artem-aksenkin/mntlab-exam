@@ -1,4 +1,19 @@
 #!/usr/bin/bash
+function status_vagrant
+    {
+    cd $path
+    if [[ $(vagrant status | grep "not created") > 0 ]]; then
+        status="destroyed"
+    else
+        if [[ $(vagrant status | grep "running") > 0 ]]; then
+            status="running"
+        else
+            if [[ $(vagrant status | grep "poweroff") > 0 ]]; then
+                status="stopped"
+            fi
+        fi
+    fi
+    }
 
 function vagrant_up
 	{

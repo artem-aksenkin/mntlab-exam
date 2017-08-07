@@ -19,7 +19,8 @@
   uri:
     url: "http://{{ tomcat_address }}:{{ http_port }}"
     return_content: yes
-  register: webpage
+    method: HEAD
+    register: webpage
 
 - name: Fail if tomcat is wrong or offline
   fail:

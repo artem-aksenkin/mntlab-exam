@@ -10,7 +10,7 @@
 
 - name: Put deployment info file
   template:
-    src: 'build-info.txt.j2d'
+    src: 'deploy-info.txt.j2d'
     mode: "u=rwx,g=rwx,o=rwx"
     dest: /var/lib/tomcat/webapps/deploy-info.txt
   become: yes

@@ -6,7 +6,7 @@
       vagrant:
         dest: /home/student/cm/ansible/day-4/
         state: started
-      when: status_vagrant == "stopped" or state == "destroyed"
+      when: status_vagrant == "stopped" or status_vagrant == "destroyed"
       register: hostinfo
 
     - name: Add discovered hosts

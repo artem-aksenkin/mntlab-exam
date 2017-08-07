@@ -8,12 +8,6 @@
         state: started
       register: hostinfo
 
-    - name: Jenkins vars lookup
-      command: echo "{{ lookup('env','WORKSPACE') }}"
-      register: jenkins_job_workspace
-
-    - debug: var=jenkins_job_workspace
-
     - name: Add discovered hosts
       add_host:
         groups: vagrant
@@ -45,6 +39,11 @@
 
 - name: TESTING
   hosts: vagrant
+  pre_tasks:
+      command: echo "{{ lookup('env','WORKSPACE') }}"
+      register: jenkins_job_workspace
+
+  - debug: var=jenkins_job_workspace
   roles:
     - java_test
     - tomcat_test

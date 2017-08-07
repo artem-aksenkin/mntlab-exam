@@ -52,7 +52,9 @@ node("${env.SLAVE}") {
     */
     withEnv(["ANSIBLE_FORCE_COLOR=true", "PYTHONUNBUFFERED=1"]){
         ansiColor('xterm') {
-            sh "ansible-playbook stack.yml -t create -vv"
+            sh "ansible-playbook stack.yml -t create -v"
+            sh "cat ${WORKSPACE}/stack.yml"
+
         }
     }
 
@@ -66,7 +68,11 @@ node("${env.SLAVE}") {
 
     withEnv(["ANSIBLE_FORCE_COLOR=true", "PYTHONUNBUFFERED=1"]){
         ansiColor('xterm') {
-           sh "ansible-playbook stack.yml -t create,provision -vv"
+           sh "ansible-playbook stack.yml -t create,provision -v"
+           sh "cat ${WORKSPACE}/roles/java/tasks/main.yml"
+           sh "cat ${WORKSPACE}/roles/java/tasks/main.yml"
+           sh "cat ${WORKSPACE}/roles/tomcat/tasks/main.yml"
+           sh "cat ${WORKSPACE}/roles/nginx/tasks/main.yml"
         }
     }
 
@@ -85,7 +91,8 @@ node("${env.SLAVE}") {
 
     withEnv(["ANSIBLE_FORCE_COLOR=true", "PYTHONUNBUFFERED=1"]){
         ansiColor('xterm') {
-           sh "ansible-playbook stack.yml -t create,provision,deployment -e war=${WORKSPACE}/target/mnt-exam.war -vvv"
+           sh "ansible-playbook stack.yml -t create,provision,deployment -e war=${WORKSPACE}/target/mnt-exam.war -v"
+           sh "cat ${WORKSPACE}/roles/deploy/tasks/main.yml"
         }
     }
 
@@ -103,8 +110,8 @@ node("${env.SLAVE}") {
     */
      withEnv(["ANSIBLE_FORCE_COLOR=true", "PYTHONUNBUFFERED=1"]){
         ansiColor('xterm') {
-           sh "ansible-playbook stack.yml -t create,testing -vv"
-           sh "ansible-playbook stack.yml -t create -e state=destroyed -vv"
+           sh "ansible-playbook stack.yml -t create,testing -v"
+           sh "ansible-playbook stack.yml -t create -e state=destroyed -v"
         }
     }
   deleteDir()

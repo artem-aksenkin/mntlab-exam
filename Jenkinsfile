@@ -29,10 +29,9 @@ node("${env.SLAVE}") {
     sh "echo Build User Name: ${BUILD_USER} >> src/main/resources/build-info.txt"
     }
     sh '''
-    echo "GIT URL: 'git config --get remote.origin.url'" >> ${WORKSPACE}/src/main/resources/build-info.txt
-    echo "GIT Commit: 'git rev-parse HEAD'" >> ${WORKSPACE}/src/main/resources/build-info.txt
-    echo "GIT Branch: 'git rev-parse --abbrev-ref HEAD'" >> ${WORKSPACE}/src/main/resources/build-info.txt
-    sh "cat ${WORKSPACE}/src/main/resources/build-info.txt"
+    echo "GIT URL: `git config --get remote.origin.url`" >> ${WORKSPACE}/src/main/resources/build-info.txt
+    echo "GIT Commit: `git rev-parse HEAD`" >> ${WORKSPACE}/src/main/resources/build-info.txt
+    echo "GIT Branch: `git rev-parse --abbrev-ref HEAD`" >> ${WORKSPACE}/src/main/resources/build-info.txt
     '''
     sh "cp ${WORKSPACE}/src/main/resources/build-info.txt ${WORKSPACE}/roles/deploy/templates/build-info.txt.j2d"
     sh "mvn clean package -DbuildNumber=${BUILD_NUMBER}"
